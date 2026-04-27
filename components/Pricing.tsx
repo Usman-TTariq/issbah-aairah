@@ -1,249 +1,246 @@
 "use client";
 
-import { useState } from "react";
-import PopupModal from "./PopupModal";
-import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-const BASE_FEATURES = [
-  "FREE Round of revision",
-  "Lowest Price in the Industry",
-  "FREE consultation",
-  "100% Money Back Guarantee"
+const WHY = [
+  {
+    icon: "database",
+    title: "Data-Driven",
+    text: "Every click is tracked, every action is analyzed, every strategy is backed by hard evidence.",
+  },
+  {
+    icon: "trending_up",
+    title: "ROI-Focused",
+    text: "We don\u2019t care about vanity metrics. We care about the numbers that actually grow your bank account.",
+  },
+  {
+    icon: "groups",
+    title: "Dedicated Experts",
+    text: "You get a specialized team assigned to your brand, not a generic account manager.",
+  },
+  {
+    icon: "contract",
+    title: "Full Transparency",
+    text: "Live dashboards and honest reporting. You\u2019ll never wonder what your budget is doing.",
+  },
 ];
 
-function getFeatures(deliveryDays: number) {
-  return [
-    BASE_FEATURES[0],
-    `Delivery within ${deliveryDays} business days`,
-    ...BASE_FEATURES.slice(1)
-  ];
+const TESTIMONIALS = [
+  {
+    quote:
+      "Issbah-Aairah transformed our digital presence from a whisper to a roar. Their PPC management alone increased our monthly revenue by 42% in ninety days.",
+    name: "Julian D'Arby",
+    role: "CEO, Zenith Luxury",
+    avatar: "initials",
+    initials: "JD",
+    img: null as string | null,
+  },
+  {
+    quote:
+      "The only agency that understands high-net-worth psychology. They don\u2019t just find leads; they find the right leads.",
+    name: "Marcus Sterling",
+    role: "Founder, Sterling Real Estate",
+    avatar: "img",
+    initials: "",
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDkHDh1K-A5388hA1PnQ9Au91Nx_TCNQihQ_xGFeottMvRAaLzl3QPE18GcF2vpLfCLWu4H9rTVOWHT5aIkaNZKe7OJE9eIR1_XrGLy2yvS6bu8PWIpl7en9kQE1WqSAf7pBkK0qi8HqYO6kj2IxqYb0x7xO_3uCv8y-WMfSFwWXZOFgOrANqjF5XSDckylw-MHYgkdVI6oc4Zr0OZHMU1XaR9sizHlmjkWlnbNNWKlZnMM2P917G3p1Ws-tgwMsdmVXWqcKYnlMuw",
+  },
+  {
+    quote:
+      "Methodical, professional, and uncompromising. Issbah-Aairah is the standard by which all digital marketing should be measured.",
+    name: "Elena Korvak",
+    role: "Marketing Director, Avant-Tech",
+    avatar: "img",
+    initials: "",
+    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCJIOjV3vKuRvJ4PKPUCfVxR7-Axu6xkGZdSb2WvAoGuhG2jfv2udB-JOW6pSQDLuURSpvwgRLcj2a7tRm5tB2q8rIr1CwdwZAaKRNeVQ9gx3GduM-TuF-o3PNvrVclTkaWhimcO8t_nrw9zXTFUJRogy6iplk2IijXmVYyTqHKkRpvqL_03DshbEJJJG1ma6gX83m1IauZVc_IHbzEPsWAChpUdBRLHbAMESYW71ncc_7ZHK1Q3txn8k9_VW_g7bN1sfyy0Zc8C4U",
+  },
+];
+
+function StarRow() {
+  return (
+    <div className="flex text-primary mb-6">
+      {[0, 1, 2, 3, 4].map((i) => (
+        <span key={i} className="material-symbols-outlined text-sm material-symbols-filled">
+          star
+        </span>
+      ))}
+    </div>
+  );
 }
 
 export default function Pricing() {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  const plans = [
-    {
-      name: "Basic",
-      oneTimePrice: 299,
-      description: "2 Logo Concept by 1 Logo Designer",
-      icon: "/images/Earnytics LLc Icon/Brown.png",
-      gradient: "from-blue-500 to-cyan-500",
-      deliveryDays: 2,
-      highlighted: false,
-      popular: false
-    },
-    {
-      name: "Start Up",
-      oneTimePrice: 299,
-      description: "4 Logo Concept by 2 Logo Designer",
-      icon: "/images/Earnytics LLc Icon/Brown.png",
-      gradient: "from-blue-600 to-cyan-600",
-      deliveryDays: 2,
-      highlighted: false,
-      popular: false
-    },
-    {
-      name: "Professional",
-      oneTimePrice: 999,
-      description: "10 Logo Concept by 6 Logo Designer",
-      icon: "/images/Earnytics LLc Icon/Platinum.png",
-      gradient: "from-orange-500 to-pink-500",
-      deliveryDays: 3,
-      highlighted: true,
-      popular: true
-    },
-    {
-      name: "Basic 1",
-      oneTimePrice: 1399,
-      description: "Unlimited Logo Concept by 6 Logo Designer",
-      icon: "/images/Earnytics LLc Icon/Brown.png",
-      gradient: "from-blue-500 to-cyan-500",
-      deliveryDays: 2,
-      highlighted: false,
-      popular: false
-    },
-    {
-      name: "Start Up 1",
-      oneTimePrice: 1999,
-      description: "Unlimited Logo Concept by 8 Logo Designer",
-      icon: "/images/Earnytics LLc Icon/Platinum.png",
-      gradient: "from-orange-600 to-pink-600",
-      deliveryDays: 2,
-      highlighted: false,
-      popular: false
-    },
-    {
-      name: "Professional 1",
-      oneTimePrice: 4000,
-      description: "Unlimited Logo Concept by 10 Logo Designer",
-      icon: "/images/Earnytics LLc Icon/Diamond.png",
-      gradient: "from-purple-500 to-pink-500",
-      deliveryDays: 3,
-      highlighted: false,
-      popular: false
-    }
-  ].map((p) => ({ ...p, features: getFeatures(p.deliveryDays) }));
-
-  const getDisplayPrice = (plan: (typeof plans)[0]) => ({
-    value: plan.oneTimePrice,
-    suffix: " one-time",
-    label: "One-time payment"
-  });
-
-  const formatPrice = (n: number) => {
-    if (n >= 1000) return n.toLocaleString();
-    return n.toString();
-  };
+  const router = useRouter();
 
   return (
-    <section id="pricing" className="py-20 bg-gray-50 scroll-mt-20">
-      <div className="container mx-auto px-6">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <p className="text-orange-500 text-sm font-semibold mb-3 uppercase tracking-wider">
-            Logo &amp; Branding
-          </p>
-          <h2 className="text-5xl font-bold text-gray-900 mb-4">
-            Choose Your Perfect Plan
-          </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-6">
-            One-time pricing with FREE revision, fast delivery, and money-back guarantee
-          </p>
-          <a href="#pricing-cards">
-            <button className="px-8 py-3 rounded-full text-sm font-semibold bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md hover:from-orange-600 hover:to-red-600 transition-all hover:shadow-lg">
-              Pricing Plans
-            </button>
-          </a>
-        </div>
-
-        {/* Pricing Cards - 6 plans */}
-        <div id="pricing-cards" className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto scroll-mt-8">
-          {plans.map((plan, index) => {
-            const { value, suffix, label } = getDisplayPrice(plan);
-            return (
+    <>
+      <section className="py-section-padding bg-black scroll-mt-24" id="about">
+        <div className="max-w-[1280px] mx-auto px-8">
+          <div className="text-center mb-16">
+            <h2 className="font-headline-lg text-3xl sm:text-4xl md:text-headline-lg text-white mb-4">
+              Uncompromising Standards
+            </h2>
+            <p className="text-outline uppercase tracking-widest font-label-sm">How we ensure your market dominance</p>
+          </div>
+          <div className="grid md:grid-cols-4 gap-8">
+            {WHY.map((item, i) => (
               <div
-                key={index}
-                className={`relative bg-white rounded-2xl overflow-hidden transition-all duration-500 group cursor-pointer border border-orange-200 shadow-lg hover:shadow-xl ${
-                  plan.highlighted
-                    ? "ring-2 ring-orange-500 lg:scale-[1.02]"
-                    : "hover:scale-[1.02]"
-                }`}
+                key={item.title}
+                className={`text-center p-8 ${i < WHY.length - 1 ? "md:border-r md:border-white/5" : ""}`}
               >
-                {plan.popular && (
-                  <div className="absolute top-0 right-0 z-10">
-                    <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-1.5 rounded-bl-xl font-semibold text-xs">
-                      ⭐ Most Popular
-                    </div>
-                  </div>
-                )}
+                <span className="material-symbols-outlined text-primary text-3xl mb-4 block">{item.icon}</span>
+                <h4 className="text-white font-bold mb-2">{item.title}</h4>
+                <p className="text-sm text-outline">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                <div className={`bg-gradient-to-br ${plan.gradient} p-6 text-white text-center transition-all duration-300 group-hover:brightness-110`}>
-                  <div className="w-16 h-16 mx-auto mb-2 flex items-center justify-center">
-                    <Image
-                      src={plan.icon}
-                      alt={plan.name}
-                      width={64}
-                      height={64}
-                      className="w-full h-full object-contain drop-shadow-lg"
+      <section className="py-section-padding bg-surface-container-low overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-8">
+          <h2 className="font-headline-lg text-3xl sm:text-4xl md:text-headline-lg text-white mb-16 text-center">
+            Words From The <span className="text-primary">Elite</span>
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {TESTIMONIALS.map((t) => (
+              <div key={t.name} className="premium-card p-10 relative rounded-xl">
+                <StarRow />
+                <p className="text-on-surface italic mb-8">&quot;{t.quote}&quot;</p>
+                <div className="flex items-center gap-4">
+                  {t.avatar === "initials" ? (
+                    <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary">
+                      {t.initials}
+                    </div>
+                  ) : (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      alt={t.name}
+                      className="w-12 h-12 rounded-full object-cover border border-primary/30"
+                      src={t.img!}
+                      width={48}
+                      height={48}
                     />
+                  )}
+                  <div>
+                    <div className="text-white font-bold text-sm">{t.name}</div>
+                    <div className="text-xs text-outline">{t.role}</div>
                   </div>
-                  <h3 className="text-xl font-bold">{plan.name}</h3>
-                </div>
-
-                <div className="p-6">
-                  <div className="text-center mb-4">
-                    <div className="flex items-baseline justify-center gap-0.5">
-                      <span className="text-gray-600 text-lg">$</span>
-                      <span className="text-4xl font-bold text-orange-500">{formatPrice(value)}</span>
-                      <span className="text-gray-500 text-sm ml-1">{suffix}</span>
-                    </div>
-                    <p className="text-gray-500 text-xs mt-1">{label}</p>
-                  </div>
-                  <p className="text-gray-700 text-sm font-medium mb-4 text-center">{plan.description}</p>
-
-                  <ul className="space-y-2 mb-6">
-                    {plan.features.map((f, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
-                        <span className="text-orange-500 flex-shrink-0 mt-0.5">✔</span>
-                        <span>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <button
-                    type="button"
-                    onClick={() => setIsPopupOpen(true)}
-                    className="w-full py-3 rounded-xl font-semibold bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 transition-all shadow-md hover:shadow-lg"
-                  >
-                    ORDER NOW
-                  </button>
                 </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
+      </section>
 
-        {/* Trust Section */}
-        <div className="mt-20 text-center">
-          <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">
-              Why Choose issbah-aairah?
-            </h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                { icon: "/images/Earnytics LLc Icon/Fast & Speed.png", title: "Lightning Fast", desc: "Optimized for speed" },
-                { icon: "/images/Earnytics LLc Icon/Secure.png", title: "100% Secure", desc: "Enterprise security" },
-                { icon: "/images/Earnytics LLc Icon/SEO.png", title: "SEO Optimized", desc: "Built for rankings" },
-                { icon: "/images/Earnytics LLc Icon/Mobile first.png", title: "Mobile First", desc: "Perfect on any device" },
-                { icon: "/images/Earnytics LLc Icon/Custom Design.png", title: "Custom Design", desc: "Tailored to your brand" },
-                { icon: "/images/Earnytics LLc Icon/7 Support.png", title: "24/7 Support", desc: "Always here to help" }
-              ].map((item, idx) => (
-                <div key={idx} className="text-center group hover:scale-105 transition-transform">
-                  <div className="w-16 h-16 mx-auto mb-3 relative">
-                    <Image 
-                      src={item.icon} 
-                      alt={item.title}
-                      width={64}
-                      height={64}
-                      className="w-full h-full object-contain group-hover:scale-110 transition-transform"
-                    />
-                  </div>
-                  <h4 className="font-semibold text-gray-900 mb-1 text-sm">{item.title}</h4>
-                  <p className="text-gray-600 text-xs">{item.desc}</p>
+      <section className="py-section-padding bg-black scroll-mt-24" id="contact">
+        <div className="max-w-[1280px] mx-auto px-8 grid md:grid-cols-2 gap-24">
+          <div>
+            <h2 className="font-headline-lg text-3xl sm:text-4xl md:text-headline-lg text-white mb-6">
+              Request Your <span className="text-primary">Dominance</span> Strategy
+            </h2>
+            <p className="text-on-surface-variant mb-12">
+              We only work with a select number of brands to ensure uncompromising attention. Apply below to see if your
+              brand qualifies for our elite ecosystem.
+            </p>
+            <div className="space-y-8">
+              <div className="flex gap-4">
+                <span className="material-symbols-outlined text-primary shrink-0">location_on</span>
+                <div>
+                  <h5 className="text-white font-bold">London HQ</h5>
+                  <p className="text-sm text-outline">One Canada Square, Canary Wharf, London</p>
                 </div>
-              ))}
+              </div>
+              <div className="flex gap-4">
+                <span className="material-symbols-outlined text-primary shrink-0">mail</span>
+                <div>
+                  <h5 className="text-white font-bold">Direct Inquiry</h5>
+                  <p className="text-sm text-outline">elite@issbah-aairah.com</p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <span className="material-symbols-outlined text-primary shrink-0">call</span>
+                <div>
+                  <h5 className="text-white font-bold">Private Line</h5>
+                  <p className="text-sm text-outline">+44 20 7946 0123</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="mt-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl p-10 text-center text-white">
-          <h3 className="text-3xl font-bold mb-3">Ready to Get Started?</h3>
-          <p className="text-white/90 text-lg mb-6 max-w-2xl mx-auto">
-            Join hundreds of successful businesses using issbah-aairah
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a href="/contact">
-              <button className="bg-white text-orange-500 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-all">
-                Start Free Trial
-              </button>
-            </a>
-            <button 
-              onClick={() => setIsPopupOpen(true)}
-              className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-xl font-semibold hover:bg-white/10 transition-all"
+          <div>
+            <form
+              className="space-y-6"
+              onSubmit={(e) => {
+                e.preventDefault();
+                router.push("/contact");
+              }}
             >
-              Contact Sales
-            </button>
+              <div>
+                <input
+                  className="w-full bg-transparent border-0 border-b border-white/20 py-4 focus:ring-0 focus:border-primary text-white placeholder:text-outline transition-all outline-none"
+                  placeholder="Full Name"
+                  type="text"
+                  name="name"
+                  autoComplete="name"
+                />
+              </div>
+              <div>
+                <input
+                  className="w-full bg-transparent border-0 border-b border-white/20 py-4 focus:ring-0 focus:border-primary text-white placeholder:text-outline transition-all outline-none"
+                  placeholder="Business Email"
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                />
+              </div>
+              <div>
+                <select
+                  className="w-full bg-transparent border-0 border-b border-white/20 py-4 focus:ring-0 focus:border-primary text-outline transition-all appearance-none outline-none cursor-pointer"
+                  name="type"
+                  defaultValue=""
+                >
+                  <option value="" disabled className="bg-black">
+                    Select Business Type
+                  </option>
+                  <option className="bg-black">Luxury Retail</option>
+                  <option className="bg-black">Professional Services</option>
+                  <option className="bg-black">Technology/SaaS</option>
+                  <option className="bg-black">Real Estate</option>
+                </select>
+              </div>
+              <div>
+                <textarea
+                  className="w-full bg-transparent border-0 border-b border-white/20 py-4 focus:ring-0 focus:border-primary text-white placeholder:text-outline transition-all outline-none resize-y min-h-[120px]"
+                  placeholder="Briefly describe your objectives"
+                  rows={4}
+                  name="message"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full gold-gradient text-black py-5 font-label-sm uppercase tracking-[0.2em] hover:brightness-110 transition-all rounded-sm"
+              >
+                Start Your Campaign
+              </button>
+            </form>
           </div>
-          <p className="text-white/80 text-sm mt-4">
-            ✓ No credit card required • ✓ 14-day money-back guarantee
-          </p>
         </div>
-      </div>
+      </section>
 
-      {/* Popup Modal */}
-      <PopupModal isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
-    </section>
+      <section className="py-32 bg-black overflow-hidden relative">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" aria-hidden />
+        <div className="max-w-[1280px] mx-auto px-8 text-center relative z-10">
+          <h2 className="font-display-xl text-5xl md:text-7xl text-white mb-8">Ready to Dominate Your Market?</h2>
+          <p className="text-on-surface-variant max-w-2xl mx-auto mb-12">
+            The digital landscape rewards the bold. Secure your position at the top.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-block gold-gradient text-black px-12 py-5 font-label-sm uppercase tracking-widest rounded-sm hover:scale-105 transition-all shadow-[0_0_50px_-10px_rgba(212,175,55,0.4)]"
+          >
+            Start Your Journey
+          </Link>
+        </div>
+      </section>
+    </>
   );
 }

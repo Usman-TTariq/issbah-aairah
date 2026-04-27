@@ -4,11 +4,11 @@ import ContactForm from "@/components/ContactForm";
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-black text-on-surface">
       <Navbar />
-      
+
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-navy-900 to-navy-800 text-white py-20 mt-20">
+      <div className="relative border-b border-yellow-600/20 bg-black/80 text-white py-20 mt-20 md:mt-24">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-5xl font-bold mb-4">Get In Touch</h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -54,8 +54,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-1">Email Us</h3>
-                    <a href="mailto:info@earnytics.com" className="text-white/90 hover:text-white transition">
-                      info@earnytics.com
+                    <a href="mailto:info@issbah-aairah.com" className="text-white/90 hover:text-white transition">
+                      info@issbah-aairah.com
                     </a>
                   </div>
                 </div>

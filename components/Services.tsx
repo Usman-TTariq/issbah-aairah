@@ -1,79 +1,83 @@
-import Image from "next/image";
+const services = [
+  {
+    icon: "search",
+    title: "SEO",
+    description:
+      "Organic domination through architectural integrity and authoritative content mapping.",
+  },
+  {
+    icon: "ads_click",
+    title: "PPC",
+    description: "High-precision paid acquisition designed for maximum conversion and minimal waste.",
+  },
+  {
+    icon: "share",
+    title: "Social Media",
+    description: "Elite community management and targeted social scaling for luxury perception.",
+  },
+  {
+    icon: "edit_note",
+    title: "Content Strategy",
+    description: "Storytelling that converts, establishing your brand as the definitive voice in its niche.",
+  },
+  {
+    icon: "mail",
+    title: "Email Marketing",
+    description: "Sophisticated automation flows that nurture leads into loyal, high-lifetime-value clients.",
+  },
+  {
+    icon: "analytics",
+    title: "CRO",
+    description: "Meticulous optimization of every touchpoint to squeeze more revenue from existing traffic.",
+  },
+];
 
 export default function Services() {
-  const services = [
-    {
-      title: "Logo & Branding",
-      description: "Creating unique and memorable brand identities that resonate with your target audience and set you apart from competitors.",
-      icon: "/images/Earnytics LLc Icon/Logo & branding.png",
-      gradient: "from-pink-500 to-rose-500"
-    },
-    {
-      title: "Website Design",
-      description: "Designing beautiful, user-friendly websites that engage visitors and drive conversions with modern aesthetics.",
-      icon: "/images/Earnytics LLc Icon/website design.png",
-      gradient: "from-blue-500 to-cyan-500"
-    },
-    {
-      title: "Social Media",
-      description: "Building and managing your social media presence to connect with customers and grow your brand online.",
-      icon: "/images/Earnytics LLc Icon/Social media.png",
-      gradient: "from-purple-500 to-pink-500"
-    },
-    {
-      title: "Content & Copywriting",
-      description: "Crafting compelling content and copy that tells your brand story and engages your audience effectively.",
-      icon: "/images/Earnytics LLc Icon/Content & Copywriting.png",
-      gradient: "from-amber-500 to-orange-500"
-    },
-    {
-      title: "Website Development",
-      description: "Building robust, scalable web applications using cutting-edge technologies and best practices.",
-      icon: "/images/Earnytics LLc Icon/Website Devlop.png",
-      gradient: "from-emerald-500 to-teal-500"
-    },
-    {
-      title: "Hosting & Maintenance",
-      description: "Providing reliable hosting solutions and ongoing maintenance to keep your website running smoothly 24/7.",
-      icon: "/images/Earnytics LLc Icon/Hosting & maintenance.png",
-      gradient: "from-indigo-500 to-purple-500"
-    }
-  ];
-
   return (
-    <section id="services" className="py-20 bg-white scroll-mt-20">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <p className="text-orange-500 text-sm font-medium mb-2 uppercase tracking-wide">
-            What We Do
+    <>
+      <section className="py-12 bg-black border-y border-white/5 scroll-mt-24">
+        <div className="max-w-[1280px] mx-auto px-8">
+          <p className="text-center text-label-sm uppercase tracking-[0.3em] text-outline mb-8">
+            Trusted by ambitious brands
           </p>
-          <h2 className="text-4xl font-bold text-gray-900">Our Services</h2>
+          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-40 grayscale">
+            <div className="text-xl font-bold italic tracking-widest">LUMINA</div>
+            <div className="text-xl font-bold tracking-widest">AVANT-GARDE</div>
+            <div className="text-xl font-bold tracking-widest">VELOCITY</div>
+            <div className="text-xl font-bold tracking-widest">PRESTIGE</div>
+            <div className="text-xl font-bold italic tracking-widest">ONYX</div>
+          </div>
         </div>
+      </section>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <div 
-              key={index}
-              className="group bg-white p-8 rounded-2xl border border-gray-200 hover:border-orange-500 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
-            >
-              <div className={`w-20 h-20 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg p-3`}>
-                <Image 
-                  src={service.icon} 
-                  alt={service.title}
-                  width={80}
-                  height={80}
-                  className="w-full h-full object-contain"
-                />
+      <section className="py-section-padding bg-black scroll-mt-24" id="services">
+        <div className="max-w-[1280px] mx-auto px-8">
+          <div className="mb-16">
+            <h2 className="font-headline-lg text-3xl sm:text-4xl md:text-headline-lg text-white mb-4">
+              Precision Engineering for <span className="text-primary">Digital Growth</span>
+            </h2>
+            <div className="w-24 h-1 bg-primary" />
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {services.map((s) => (
+              <div
+                key={s.title}
+                className="premium-card p-8 group hover:-translate-y-2 transition-all duration-500 rounded-xl"
+              >
+                <span className="material-symbols-outlined text-primary text-4xl mb-6 block">{s.icon}</span>
+                <h3 className="font-headline-md text-2xl text-white mb-4">{s.title}</h3>
+                <p className="text-on-surface-variant leading-relaxed mb-6">{s.description}</p>
+                <span className="text-primary font-label-sm uppercase tracking-widest flex items-center gap-2 group-hover:gap-4 transition-all cursor-default">
+                  Explore{" "}
+                  <span className="material-symbols-outlined text-sm" aria-hidden>
+                    arrow_forward
+                  </span>
+                </span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-orange-500 transition-colors">{service.title}</h3>
-              <p className="text-gray-600 leading-relaxed">{service.description}</p>
-              
-              {/* Decorative element */}
-              <div className="mt-6 h-1 w-0 bg-gradient-to-r from-orange-500 to-red-500 rounded-full group-hover:w-full transition-all duration-500"></div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

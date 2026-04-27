@@ -1,73 +1,102 @@
 "use client";
 
-import BrandWordmark from "./BrandWordmark";
+import Link from "next/link";
 
 export default function Footer() {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <footer className="bg-gradient-to-br from-navy-900 to-navy-800 text-white py-12">
-      <div className="container mx-auto px-6">
-        {/* Logo Section */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center mb-6">
-            <BrandWordmark className="text-2xl sm:text-3xl md:text-4xl" />
-          </div>
-          <p className="text-sm text-orange-500 uppercase tracking-wider">Digital Solutions</p>
+    <footer className="bg-black py-24 md:py-32 border-t border-white/10">
+      <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 px-8">
+        <div className="col-span-1 md:col-span-1">
+          <div className="text-xl font-bold text-yellow-600 dark:text-[#D4AF37] mb-8">ISSBAH-AAIRAH</div>
+          <p className="text-sm text-gray-400 leading-relaxed">
+            Pioneering the next generation of elite digital marketing strategies for high-impact brands globally.
+          </p>
         </div>
-
-        {/* Contact Info */}
-        <div className="flex flex-wrap justify-center items-center gap-8 mb-8 text-sm text-gray-300">
-          <div className="flex items-center space-x-2">
-            <span className="text-orange-500">📍</span>
-            <span>734 S Charlotte St, Lombard, IL 60148</span>    
-          </div>
-          <div className="flex items-center space-x-2">
-            <span className="text-orange-500">📧</span>
-            <span>info@issbah-aairah.com</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <span className="text-orange-500">📱</span>
-            <span>+1 (847) 208-7685</span>
-          </div>
+        <div>
+          <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Services</h4>
+          <ul className="space-y-4">
+            <li>
+              <Link href="/#services" className="text-gray-500 hover:text-yellow-600 transition-colors text-sm">
+                Search Engine Optimization
+              </Link>
+            </li>
+            <li>
+              <Link href="/#services" className="text-gray-500 hover:text-yellow-600 transition-colors text-sm">
+                Pay Per Click Management
+              </Link>
+            </li>
+            <li>
+              <Link href="/#services" className="text-gray-500 hover:text-yellow-600 transition-colors text-sm">
+                Social Strategy
+              </Link>
+            </li>
+            <li>
+              <Link href="/#services" className="text-gray-500 hover:text-yellow-600 transition-colors text-sm">
+                Email Automation
+              </Link>
+            </li>
+          </ul>
         </div>
-
-        {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-6">
-          <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-            <p>Copyright © 2026 issbah-aairah. All Rights Reserved.</p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="/privacy" className="text-orange-500 hover:text-orange-400 transition">
-                Privacy Policy
-              </a>
-              <a href="/terms" className="text-orange-500 hover:text-orange-400 transition">
-                Terms & Conditions
-              </a>
-            </div>
+        <div>
+          <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Company</h4>
+          <ul className="space-y-4">
+            <li>
+              <Link href="/#about" className="text-gray-500 hover:text-yellow-600 transition-colors text-sm">
+                Our Philosophy
+              </Link>
+            </li>
+            <li>
+              <Link href="/#case-studies" className="text-gray-500 hover:text-yellow-600 transition-colors text-sm">
+                Case Studies
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="text-gray-500 hover:text-yellow-600 transition-colors text-sm">
+                Contact
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Newsletter</h4>
+          <p className="text-sm text-gray-500 mb-6">Receive elite digital insights weekly.</p>
+          <div className="flex border-b border-white/20 pb-2 gap-2">
+            <input
+              className="bg-transparent border-0 focus:ring-0 text-white w-full text-sm placeholder:text-gray-600 outline-none"
+              placeholder="Email Address"
+              type="email"
+              aria-label="Newsletter email"
+            />
+            <button type="button" className="text-primary material-symbols-outlined shrink-0" aria-label="Subscribe">
+              send
+            </button>
           </div>
         </div>
       </div>
+      <div className="max-w-[1280px] mx-auto px-8 mt-24 flex flex-col md:flex-row justify-between items-center border-t border-white/5 pt-8">
+        <p className="font-inter text-sm text-gray-400">© 2026 ISSBAH-AAIRAH. All rights reserved.</p>
+        <div className="flex gap-8 mt-4 md:mt-0">
+          <Link href="/privacy" className="text-gray-500 hover:text-white transition-colors text-sm">
+            Privacy Policy
+          </Link>
+          <Link href="/terms" className="text-gray-500 hover:text-white transition-colors text-sm">
+            Terms of Service
+          </Link>
+        </div>
+      </div>
 
-      {/* Back to Top Button */}
       <button
         onClick={scrollToTop}
-        className="fixed bottom-8 right-8 bg-orange-500 hover:bg-orange-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 z-50"
+        className="fixed bottom-8 right-8 gold-gradient text-black w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 z-50"
         aria-label="Scroll to top"
+        type="button"
       >
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M5 10l7-7m0 0l7 7m-7-7v18"
-          />
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
         </svg>
       </button>
     </footer>
