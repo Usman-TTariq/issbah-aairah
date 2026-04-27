@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import PopupModal from "./PopupModal";
 
 function BrandLogo({ className }: { className?: string }) {
   return (
@@ -20,6 +21,7 @@ function BrandLogo({ className }: { className?: string }) {
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [proposalOpen, setProposalOpen] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
 
@@ -57,6 +59,7 @@ export default function Navbar() {
     "font-inter text-[10px] font-bold tracking-widest uppercase text-primary border-b border-primary pb-1 brightness-110";
 
   return (
+    <>
     <header className="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-xl border-b border-yellow-600/20">
       <nav className="flex justify-between items-center h-20 px-4 sm:px-8 max-w-[1280px] mx-auto">
         {isHomePage ? (
@@ -115,12 +118,13 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:block">
-          <Link
-            href="/contact"
-            className="gold-gradient text-black px-6 py-2 font-label-sm uppercase tracking-widest rounded-sm hover:brightness-110 transition-all inline-block text-center"
+          <button
+            type="button"
+            onClick={() => setProposalOpen(true)}
+            className="gold-gradient text-black px-6 py-2 font-label-sm uppercase tracking-widest rounded-sm hover:brightness-110 transition-all"
           >
             Get Proposal
-          </Link>
+          </button>
         </div>
 
         <button
@@ -177,15 +181,20 @@ export default function Navbar() {
               </Link>
             </>
           )}
-          <Link
-            href="/contact"
-            onClick={() => setMobileMenuOpen(false)}
+          <button
+            type="button"
+            onClick={() => {
+              setMobileMenuOpen(false);
+              setProposalOpen(true);
+            }}
             className="block w-full gold-gradient text-black py-3 font-label-sm uppercase tracking-widest text-center rounded-sm"
           >
             Get Proposal
-          </Link>
+          </button>
         </div>
       )}
     </header>
+    <PopupModal isOpen={proposalOpen} onClose={() => setProposalOpen(false)} />
+    </>
   );
 }

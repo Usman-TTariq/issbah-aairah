@@ -21,6 +21,17 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Modal: scroll without visible scrollbars (wheel / touch still works) */
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
 }
 
 .gold-glow {

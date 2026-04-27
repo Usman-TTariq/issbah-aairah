@@ -106,8 +106,8 @@ export default function ContactPage() {
                     <h3 className="font-semibold text-lg mb-1">Working Hours</h3>
                     <p className="text-white/90">
                       Monday - Friday: 9:00 AM - 6:00 PM<br />
-                      Saturday: 10:00 AM - 4:00 PM<br />
-                      Sunday: Closed
+                      {/* Saturday: 10:00 AM - 4:00 PM<br /> */}
+                      {/* Sunday: Closed */}
                     </p>
                   </div>
                 </div>
@@ -115,7 +115,7 @@ export default function ContactPage() {
             </div>
 
             {/* Social Media */}
-            <div className="bg-white rounded-3xl shadow-xl p-8">
+            {/* <div className="bg-white rounded-3xl shadow-xl p-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Follow Us</h3>
               <p className="text-gray-600 mb-6">Stay connected on social media</p>
               <div className="flex space-x-4">
@@ -132,7 +132,7 @@ export default function ContactPage() {
                   in
                 </a>
               </div>
-            </div>
+            </div> */}
 
             {/* Quick Response */}
             <div className="bg-green-50 border-2 border-green-200 rounded-2xl p-6">

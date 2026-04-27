@@ -33,13 +33,13 @@ export default function Hero() {
               >
                 Get Free Strategy
               </Link>
-              <button
+              {/* <button
                 type="button"
                 onClick={scrollToCaseStudies}
                 className="border border-primary text-primary px-8 py-4 font-label-sm uppercase tracking-widest rounded-sm hover:bg-primary/10 transition-all"
               >
                 View Case Studies
-              </button>
+              </button> */}
             </div>
           </div>
           <div className="relative">
