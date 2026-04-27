@@ -163,8 +163,10 @@ export default function PrivacyPage() {
             </p>
             <div className="bg-gray-50 rounded-xl p-6">
               <p className="text-gray-700 mb-2"><strong>Email:</strong> info@issbah-aairah.com</p>
-              <p className="text-gray-700 mb-2"><strong>Phone:</strong> +1 (347) 588-7791</p>
-              <p className="text-gray-700"><strong>Address:</strong> 3415 MCLAUGHLIN #107, LOS ANGELES, CA 90066</p>
+              <p className="text-gray-700 mb-2"><strong>Phone:</strong> (315) 222-9614</p>
+              <p className="text-gray-700">
+                <strong>Address:</strong> 29641 S Western Ave Unit 308, Rch Palos Vrd, CA 90275
+              </p>
             </div>
           </section>
 

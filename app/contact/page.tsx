@@ -41,8 +41,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-lg mb-1">Our Office</h3>
                     <p className="text-white/90">
-                      734 S Charlotte St<br />
-                      Lombard, IL 60148
+                      29641 S Western Ave Unit 308<br />
+                      Rch Palos Vrd, CA 90275
                     </p>
                   </div>
                 </div>
@@ -67,8 +67,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-1">Call Us</h3>
-                    <a href="tel:+18472087685" className="text-white/90 hover:text-white transition">
-                      +1 (847) 208-7685
+                    <a href="tel:+13152229614" className="text-white/90 hover:text-white transition">
+                      (315) 222-9614
                     </a>
                   </div>
                 </div>
@@ -125,13 +125,13 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* Map Section - 734 S Charlotte St, Lombard, IL 60148 */}
+        {/* Map — 29641 S Western Ave Unit 308, Rancho Palos Verdes, CA 90275 */}
         <div className="mt-20 max-w-6xl mx-auto">
           <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
             <div className="aspect-video w-full">
               <iframe
-                title="issbah-aairah - 734 S Charlotte St, Lombard, IL 60148"
-                src="https://maps.google.com/maps?q=734+S+Charlotte+St,+Lombard,+IL+60148&z=15&output=embed"
+                title="issbah-aairah — 29641 S Western Ave Unit 308, Rancho Palos Verdes, CA 90275"
+                src="https://maps.google.com/maps?q=29641+S+Western+Ave+Unit+308,+Rancho+Palos+Verdes,+CA+90275&z=15&output=embed"
                 className="w-full h-full border-0"
                 allowFullScreen
                 loading="lazy"
@@ -139,7 +139,9 @@ export default function ContactPage() {
               />
             </div>
             <div className="p-4 text-center border-t border-gray-100">
-              <p className="text-gray-600 font-medium">734 S Charlotte St, Lombard, IL 60148</p>
+              <p className="text-gray-600 font-medium">
+                29641 S Western Ave Unit 308, Rch Palos Vrd, CA 90275
+              </p>
             </div>
           </div>
         </div>

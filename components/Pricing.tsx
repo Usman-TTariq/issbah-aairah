@@ -146,8 +146,12 @@ export default function Pricing() {
               <div className="flex gap-4">
                 <span className="material-symbols-outlined text-primary shrink-0">location_on</span>
                 <div>
-                  <h5 className="text-white font-bold">London HQ</h5>
-                  <p className="text-sm text-outline">One Canada Square, Canary Wharf, London</p>
+                  <h5 className="text-white font-bold">Office</h5>
+                  <p className="text-sm text-outline">
+                    29641 S Western Ave Unit 308
+                    <br />
+                    Rch Palos Vrd, CA 90275
+                  </p>
                 </div>
               </div>
               <div className="flex gap-4">
@@ -161,7 +165,7 @@ export default function Pricing() {
                 <span className="material-symbols-outlined text-primary shrink-0">call</span>
                 <div>
                   <h5 className="text-white font-bold">Private Line</h5>
-                  <p className="text-sm text-outline">+44 20 7946 0123</p>
+                  <p className="text-sm text-outline">(315) 222-9614</p>
                 </div>
               </div>
             </div>

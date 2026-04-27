@@ -1,8 +1,22 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+function BrandLogo({ className }: { className?: string }) {
+  return (
+    <Image
+      src="/images/logot.png"
+      alt="ISSBAH-AAIRAH"
+      width={520}
+      height={230}
+      className={`h-12 sm:h-14 md:h-[50px] w-auto max-w-[260px] sm:max-w-[380px] md:max-w-[480px] object-contain object-left ${className ?? ""}`}
+      priority
+    />
+  );
+}
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -49,17 +63,14 @@ export default function Navbar() {
           <button
             type="button"
             onClick={handleHome}
-            className="text-xl sm:text-2xl font-black tracking-tighter text-yellow-600 dark:text-[#D4AF37] text-left"
+            className="flex items-center shrink-0 py-1 text-left"
             aria-label="ISSBAH-AAIRAH — scroll to top"
           >
-            ISSBAH-AAIRAH
+            <BrandLogo />
           </button>
         ) : (
-          <Link
-            href="/"
-            className="text-xl sm:text-2xl font-black tracking-tighter text-yellow-600 dark:text-[#D4AF37]"
-          >
-            ISSBAH-AAIRAH
+          <Link href="/" className="flex items-center shrink-0 py-1 hover:opacity-90 transition-opacity">
+            <BrandLogo />
           </Link>
         )}
 

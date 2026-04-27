@@ -49,11 +49,11 @@ export default function Footer() {
                 Our Philosophy
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link href="/#case-studies" className="text-gray-500 hover:text-yellow-600 transition-colors text-sm">
                 Case Studies
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link href="/contact" className="text-gray-500 hover:text-yellow-600 transition-colors text-sm">
                 Contact
