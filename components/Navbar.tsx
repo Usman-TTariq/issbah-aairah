@@ -83,9 +83,9 @@ export default function Navbar() {
               <button type="button" onClick={() => scrollToSection("services")} className={navItemClass}>
                 Services
               </button>
-              <button type="button" onClick={() => scrollToSection("case-studies")} className={navItemClass}>
+              {/* <button type="button" onClick={() => scrollToSection("case-studies")} className={navItemClass}>
                 Case Studies
-              </button>
+              </button> */}
               <button type="button" onClick={() => scrollToSection("about")} className={navItemClass}>
                 About
               </button>

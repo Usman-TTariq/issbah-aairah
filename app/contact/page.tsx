@@ -14,6 +14,30 @@ export default function ContactPage() {
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Have a question or want to work together? We&apos;d love to hear from you.
           </p>
+          <div className="mt-10 max-w-2xl mx-auto space-y-2 text-sm sm:text-base text-gray-400">
+            <p>
+              <span className="text-outline uppercase tracking-wider text-xs font-semibold mr-2">Phone</span>
+              <a href="tel:+13152229614" className="text-primary hover:underline">
+                (315) 222-9614
+              </a>
+            </p>
+            <p>
+              <span className="text-outline uppercase tracking-wider text-xs font-semibold mr-2">Email</span>
+              <a href="mailto:info@issbah-aairah.com" className="text-primary hover:underline">
+                info@issbah-aairah.com
+              </a>
+            </p>
+            <p>
+              <span className="text-outline uppercase tracking-wider text-xs font-semibold mr-2 align-top inline-block">
+                Address
+              </span>
+              <span className="text-gray-300 inline-block text-left">
+                29641 S Western Ave Unit 308
+                <br />
+                Rch Palos Vrd, CA 90275
+              </span>
+            </p>
+          </div>
         </div>
       </div>
 
@@ -140,7 +164,9 @@ export default function ContactPage() {
             </div>
             <div className="p-4 text-center border-t border-gray-100">
               <p className="text-gray-600 font-medium">
-                29641 S Western Ave Unit 308, Rch Palos Vrd, CA 90275
+                29641 S Western Ave Unit 308
+                <br />
+                Rch Palos Vrd, CA 90275
               </p>
             </div>
           </div>

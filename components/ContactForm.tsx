@@ -68,7 +68,7 @@ export default function ContactForm() {
         </label>
         <input
           type="email"
-          placeholder="john@example.com"
+          placeholder="you@company.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:outline-none transition-colors text-gray-900"
@@ -82,7 +82,7 @@ export default function ContactForm() {
         </label>
         <input
           type="tel"
-          placeholder="+1 (555) 123-4567"
+          placeholder="(315) 222-9614"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:outline-none transition-colors text-gray-900"

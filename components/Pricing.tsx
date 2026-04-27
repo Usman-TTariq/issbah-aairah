@@ -158,7 +158,7 @@ export default function Pricing() {
                 <span className="material-symbols-outlined text-primary shrink-0">mail</span>
                 <div>
                   <h5 className="text-white font-bold">Direct Inquiry</h5>
-                  <p className="text-sm text-outline">elite@issbah-aairah.com</p>
+                  <p className="text-sm text-outline">info@issbah-aairah.com</p>
                 </div>
               </div>
               <div className="flex gap-4">
