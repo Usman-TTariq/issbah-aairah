@@ -1,10 +1,42 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
+import { submitSiteLead } from "@/lib/siteLead";
 
 export default function Footer() {
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterStatus, setNewsletterStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [newsletterError, setNewsletterError] = useState("");
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setNewsletterError("");
+    const email = newsletterEmail.trim();
+    if (!email) {
+      setNewsletterStatus("error");
+      setNewsletterError("Enter your email.");
+      return;
+    }
+    setNewsletterStatus("sending");
+    const result = await submitSiteLead({
+      name: "Newsletter signup",
+      email,
+      phone: "—",
+      message: "Requested: weekly elite digital insights (footer newsletter).",
+      source: "newsletter_footer",
+    });
+    if (!result.ok) {
+      setNewsletterStatus("error");
+      setNewsletterError(result.error);
+      return;
+    }
+    setNewsletterStatus("success");
+    setNewsletterEmail("");
   };
 
   return (
@@ -64,17 +96,33 @@ export default function Footer() {
         <div>
           <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Newsletter</h4>
           <p className="text-sm text-gray-500 mb-6">Receive elite digital insights weekly.</p>
-          <div className="flex border-b border-white/20 pb-2 gap-2">
-            <input
-              className="bg-transparent border-0 focus:ring-0 text-white w-full text-sm placeholder:text-gray-600 outline-none"
-              placeholder="Email Address"
-              type="email"
-              aria-label="Newsletter email"
-            />
-            <button type="button" className="text-primary material-symbols-outlined shrink-0" aria-label="Subscribe">
-              send
-            </button>
-          </div>
+          <form onSubmit={handleNewsletterSubmit} className="space-y-2">
+            <div className="flex border-b border-white/20 pb-2 gap-2">
+              <input
+                className="bg-transparent border-0 focus:ring-0 text-white w-full text-sm placeholder:text-gray-600 outline-none"
+                placeholder="Email Address"
+                type="email"
+                aria-label="Newsletter email"
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
+                disabled={newsletterStatus === "sending"}
+              />
+              <button
+                type="submit"
+                className="text-primary material-symbols-outlined shrink-0 disabled:opacity-50"
+                aria-label="Subscribe"
+                disabled={newsletterStatus === "sending"}
+              >
+                send
+              </button>
+            </div>
+            {newsletterStatus === "error" && (
+              <p className="text-xs text-red-400">{newsletterError}</p>
+            )}
+            {newsletterStatus === "success" && (
+              <p className="text-xs text-primary">You&apos;re on the list. Thank you!</p>
+            )}
+          </form>
         </div>
       </div>
       <div className="max-w-[1280px] mx-auto px-8 mt-24 flex flex-col md:flex-row justify-between items-center border-t border-white/5 pt-8">

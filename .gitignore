@@ -36,6 +36,5 @@ public/images/GettyImages-1311462781.mov
 next-env.d.ts
 
 # env files (secrets — never commit)
-.env
-.env.*
 !.env.example
+config.bat

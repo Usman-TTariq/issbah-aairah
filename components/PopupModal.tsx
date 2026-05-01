@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { submitSiteLead } from "@/lib/siteLead";
 
 interface PopupModalProps {
   isOpen: boolean;
@@ -56,22 +57,16 @@ export default function PopupModal({ isOpen, onClose }: PopupModalProps) {
       .join("\n\n");
 
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          phone: phoneFull,
-          service: company.trim() || undefined,
-          message: composedMessage || message,
-          source: "navbar_get_proposal",
-        }),
+      const result = await submitSiteLead({
+        name,
+        email,
+        phone: phoneFull,
+        message: composedMessage || message,
+        source: "popup",
       });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) {
+      if (!result.ok) {
         setStatus("error");
-        setErrorMessage(data.error || "Something went wrong. Please try again.");
+        setErrorMessage(result.error);
         return;
       }
       setStatus("success");

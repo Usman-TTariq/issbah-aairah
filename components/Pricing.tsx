@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { submitSiteLead } from "@/lib/siteLead";
 
 const WHY = [
   {
@@ -69,7 +70,46 @@ function StarRow() {
 }
 
 export default function Pricing() {
-  const router = useRouter();
+  const [briefName, setBriefName] = useState("");
+  const [briefEmail, setBriefEmail] = useState("");
+  const [briefBusinessType, setBriefBusinessType] = useState("");
+  const [briefMessage, setBriefMessage] = useState("");
+  const [briefStatus, setBriefStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [briefError, setBriefError] = useState("");
+
+  const handleBriefSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setBriefError("");
+    if (!briefName.trim() || !briefEmail.trim() || !briefMessage.trim()) {
+      setBriefStatus("error");
+      setBriefError("Please complete name, business email, and objectives.");
+      return;
+    }
+    setBriefStatus("sending");
+    const msg = [
+      briefBusinessType.trim() ? `Business type: ${briefBusinessType.trim()}` : null,
+      briefMessage.trim(),
+    ]
+      .filter(Boolean)
+      .join("\n\n");
+    const result = await submitSiteLead({
+      name: briefName.trim(),
+      email: briefEmail.trim(),
+      phone: "(not collected on this form)",
+      message: msg,
+      source: "home_contact",
+    });
+    if (!result.ok) {
+      setBriefStatus("error");
+      setBriefError(result.error);
+      return;
+    }
+    setBriefStatus("success");
+    setBriefName("");
+    setBriefEmail("");
+    setBriefBusinessType("");
+    setBriefMessage("");
+  };
 
   return (
     <>
@@ -171,13 +211,7 @@ export default function Pricing() {
             </div>
           </div>
           <div>
-            <form
-              className="space-y-6"
-              onSubmit={(e) => {
-                e.preventDefault();
-                router.push("/contact");
-              }}
-            >
+            <form className="space-y-6" onSubmit={handleBriefSubmit}>
               <div>
                 <input
                   className="w-full bg-transparent border-0 border-b border-white/20 py-4 focus:ring-0 focus:border-primary text-white placeholder:text-outline transition-all outline-none"
@@ -185,6 +219,9 @@ export default function Pricing() {
                   type="text"
                   name="name"
                   autoComplete="name"
+                  value={briefName}
+                  onChange={(e) => setBriefName(e.target.value)}
+                  required
                 />
               </div>
               <div>
@@ -194,21 +231,33 @@ export default function Pricing() {
                   type="email"
                   name="email"
                   autoComplete="email"
+                  value={briefEmail}
+                  onChange={(e) => setBriefEmail(e.target.value)}
+                  required
                 />
               </div>
               <div>
                 <select
                   className="w-full bg-transparent border-0 border-b border-white/20 py-4 focus:ring-0 focus:border-primary text-outline transition-all appearance-none outline-none cursor-pointer"
                   name="type"
-                  defaultValue=""
+                  value={briefBusinessType}
+                  onChange={(e) => setBriefBusinessType(e.target.value)}
                 >
-                  <option value="" disabled className="bg-black">
+                  <option value="" className="bg-black">
                     Select Business Type
                   </option>
-                  <option className="bg-black">Luxury Retail</option>
-                  <option className="bg-black">Professional Services</option>
-                  <option className="bg-black">Technology/SaaS</option>
-                  <option className="bg-black">Real Estate</option>
+                  <option value="Luxury Retail" className="bg-black">
+                    Luxury Retail
+                  </option>
+                  <option value="Professional Services" className="bg-black">
+                    Professional Services
+                  </option>
+                  <option value="Technology/SaaS" className="bg-black">
+                    Technology/SaaS
+                  </option>
+                  <option value="Real Estate" className="bg-black">
+                    Real Estate
+                  </option>
                 </select>
               </div>
               <div>
@@ -217,13 +266,25 @@ export default function Pricing() {
                   placeholder="Briefly describe your objectives"
                   rows={4}
                   name="message"
+                  value={briefMessage}
+                  onChange={(e) => setBriefMessage(e.target.value)}
+                  required
                 />
               </div>
+              {briefStatus === "error" && (
+                <p className="text-sm text-red-300 border border-red-500/30 rounded-lg px-3 py-2">{briefError}</p>
+              )}
+              {briefStatus === "success" && (
+                <p className="text-sm text-primary border border-primary/30 rounded-lg px-3 py-2">
+                  Thank you — we&apos;ll be in touch shortly.
+                </p>
+              )}
               <button
                 type="submit"
-                className="w-full gold-gradient text-black py-5 font-label-sm uppercase tracking-[0.2em] hover:brightness-110 transition-all rounded-sm"
+                disabled={briefStatus === "sending"}
+                className="w-full gold-gradient text-black py-5 font-label-sm uppercase tracking-[0.2em] hover:brightness-110 transition-all rounded-sm disabled:opacity-60 disabled:pointer-events-none"
               >
-                Start Your Campaign
+                {briefStatus === "sending" ? "Sending…" : "Start Your Campaign"}
               </button>
             </form>
           </div>

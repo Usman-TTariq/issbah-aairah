@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { getContactLeadSource, submitSiteLead } from "@/lib/siteLead";
 
 export default function ContactForm() {
   const [name, setName] = useState("");
@@ -16,22 +17,19 @@ export default function ContactForm() {
     setStatus("sending");
     setErrorMessage("");
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          phone: phone || undefined,
-          service: service || undefined,
-          message,
-          source: "contact_page",
-        }),
+      const fullMessage = [service.trim() ? `Service interested in: ${service.trim()}` : null, message.trim()]
+        .filter(Boolean)
+        .join("\n\n");
+      const result = await submitSiteLead({
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone.trim() || "(not provided)",
+        message: fullMessage || message.trim(),
+        source: getContactLeadSource(),
       });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) {
+      if (!result.ok) {
         setStatus("error");
-        setErrorMessage(data.error || "Something went wrong. Please try again.");
+        setErrorMessage(result.error);
         return;
       }
       setStatus("success");
